@@ -43,6 +43,18 @@ rm ~/.claude/.simon-stack-installed
 bash <repo>/.claude/hooks/session-start.sh
 ```
 
+### 🌐 다른 레포·다른 세션에서 사용
+
+로컬 CLI 는 한 번 `install.sh` 로 끝. 웹 환경에서 **다른 레포**에 설치하려면:
+
+```bash
+# Vendor 모드 (권장, self-contained)
+cd /path/to/target-repo
+/path/to/Gstack-Ultraplan-superpowers/scripts/setup-repo.sh .
+```
+
+자세한 4 가지 시나리오 (로컬/웹, 이 레포/타 레포, bootstrap/vendor): [docs/USING-IN-OTHER-REPOS.md](docs/USING-IN-OTHER-REPOS.md)
+
 ## Skill 카테고리
 
 ### 🧭 Orchestrators
