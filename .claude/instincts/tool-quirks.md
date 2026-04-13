@@ -38,10 +38,18 @@
 
 ## Git
 
+### 2026-04-13 — `git clone` 이 GitHub default branch 를 복제, main 아님
+- **상황**: 레포를 public 으로 전환하고 main 에 푸시 했는데, 외부에서 `git clone https://github.com/<user>/<repo>` 하면 옛 base commit 만 나옴
+- **증상**: `git log` 에 1 개 commit 만. 최근 작업 내용이 안 보임
+- **원인**: GitHub default branch 가 아직 main 이 아님. `git clone` 은 서버의 default branch 를 복제
+- **회피법**: hook 스크립트는 `git clone --depth 1 --branch main` 으로 명시
+- **근본 해결**: GitHub `Settings → Branches → Default branch` → `main` 으로 전환, 옛 브랜치 삭제
+
 - `--no-verify`: 사용 금지 (pre-commit hook 우회). 사용자 명시 허가 시에만
 - `git reset --hard`, `git clean -f`, force push — confirm 없이 금지
 - `git worktree` 종료 시 `git worktree remove` 필수 (고아 브랜치 방지)
 - Conventional Commits: `feat/fix/docs/chore/refactor/test/perf/ci/build/style` 외 금지
+- **원격 브랜치 삭제 차단**: Claude Code 웹 sandbox 의 로컬 git proxy 는 `git push origin --delete <branch>` 를 HTTP 403 으로 막음. 원격 브랜치 정리는 GitHub UI 로만 가능
 
 ## Node / npm / pnpm
 
