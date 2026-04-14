@@ -62,3 +62,8 @@ coverage/
 __pycache__/
 *.pyc
 *.pyo
+
+# Context Guardian (session-local state)
+SESSION_RECOVERY.md
+context_limit_log.json
+CLAUDE.md.bak-*

@@ -1,0 +1,64 @@
+# ==============================================================================
+# .claudeignore — Gstack-Ultraplan-Superpowers (simon-stack)
+#
+# Claude Code respects this file when scanning directories. Anything listed
+# here is NOT loaded into context, saving tokens.
+#
+# Why these entries:
+# - .claude/skills/gstack/ is 12 MB / 450 files of upstream Gstack.
+#   Scanning it wastes context. It is managed by SessionStart hook, not edited here.
+# - .claude.bak-* are install backups, not working files.
+# - /tmp/simon-stack-*.log are hook logs (outside repo, but defensive).
+# - Standard entries (node_modules, .next, etc.) follow .gitignore conventions.
+# ==============================================================================
+
+# --- simon-stack specific ---
+.claude/skills/gstack/
+.claude.bak-*/
+/tmp/simon-stack-*.log
+SESSION_RECOVERY.md
+context_limit_log.json
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+
+# --- Node / Bun ---
+node_modules/
+bun.lockb
+*.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# --- Next.js / bundler artifacts ---
+.next/
+dist/
+build/
+out/
+.turbo/
+.vercel/
+.parcel-cache/
+.cache/
+
+# --- Test / coverage ---
+coverage/
+.nyc_output/
+*.log
+
+# --- Minified ---
+*.min.js
+*.min.css
+*.map
+
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Git internals (never scan) ---
+.git/

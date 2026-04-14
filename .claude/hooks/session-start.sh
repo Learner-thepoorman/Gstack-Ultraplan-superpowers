@@ -118,6 +118,21 @@ if [ -f "$REPO_DIR/scripts/session-start-instincts.sh" ] && [ ! -f ~/.claude/ses
   chmod +x ~/.claude/session-start-instincts.sh
 fi
 
+
+# --- Context Guardian self-healing (repo-local) ---
+# Ensure CLAUDE.md has the Context Guardian Rules block. If the marker is
+# missing (e.g. user deleted CLAUDE.md), re-run install-rules.sh from the
+# repo root. This is idempotent and self-healing.
+if [ -d "$REPO_DIR/.claude/skills/context-guardian" ]; then
+  if ! grep -qF "<!-- context-guardian-rules:v1 -->" "$REPO_DIR/CLAUDE.md" 2>/dev/null; then
+    log "Context Guardian rules missing from CLAUDE.md — re-installing"
+    (cd "$REPO_DIR" && bash .claude/skills/context-guardian/scripts/install-rules.sh >> "$LOG_FILE" 2>&1) \
+      || log "WARN: context-guardian install-rules.sh failed (non-fatal)"
+  else
+    log "Context Guardian rules present in CLAUDE.md"
+  fi
+fi
+
 # --- 7. Marker ---
 echo "$CURRENT_SHA" > "$MARKER"
 

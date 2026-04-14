@@ -1,0 +1,141 @@
+# CLAUDE.md — Gstack-Ultraplan-Superpowers (simon-stack)
+
+Claude Code reads this file at session start. This is a **skill development repo** — the 20+ skills here are shipped to downstream projects via the SessionStart hook. You are not building an app; you are curating a skill library.
+
+## 🎯 작업 맥락
+
+이 레포의 주 작업:
+- **Skill 작성·수정·검증** (`.claude/skills/<name>/SKILL.md`)
+- **Hook·script 개선** (`.claude/hooks/`, `scripts/`)
+- **README·docs 유지보수**
+- **Instincts seed 갱신** (`.claude/instincts/`)
+
+실제 앱 코드는 없습니다. 대신 *다른 프로젝트가 이 레포를 import 해서* 55+ skill 을 자동 장착하게 만드는 것이 목표.
+
+## 🔧 검증 도구 (Claude 가 스스로 확인 가능)
+
+Skill 수정 후 **반드시** 아래를 실행:
+
+```bash
+# 단일 skill 검증
+python3 .claude/skills/skill-gen-agent/scripts/validate_skill.py .claude/skills/<name>
+
+# 전체 repo 검증 (모든 skill 한 번에)
+for d in .claude/skills/*/; do
+  python3 .claude/skills/skill-gen-agent/scripts/validate_skill.py "${d%/}" 2>&1 | grep Result
+done
+
+# JSON cases dry-run
+python3 .claude/skills/skill-gen-agent/scripts/test_skill.py \
+  .claude/skills/<name> --cases .claude/skills/<name>/evals/cases.json --dry-run
+
+# Skill-Agent 통합 테스트 (24 checks)
+python3 .claude/skills/skill-gen-agent/scripts/tests/run_all.py
+
+# SessionStart hook 수동 실행 (idempotent)
+CLAUDE_PROJECT_DIR=$PWD CLAUDE_CODE_REMOTE=true bash .claude/hooks/session-start.sh
+
+# Bash 스크립트 문법 체크
+for f in scripts/*.sh .claude/hooks/*.sh .claude/skills/*/scripts/*.sh; do
+  bash -n "$f" && echo "OK: $f"
+done
+
+# YAML frontmatter 파싱
+python3 -c "import yaml, pathlib; [yaml.safe_load(open(p).read().split('---')[1]) for p in pathlib.Path('.claude/skills').rglob('SKILL.md')]; print('YAML OK')"
+```
+
+**원칙**: Claude 가 눈으로 확인할 수 없으면 = 검증 실패. 사용자에게 "확인해 주세요" 라고 말하지 말고 위 명령을 실행하세요.
+
+## 📂 디렉토리 구조
+
+```
+.claude/
+├── hooks/session-start.sh   ← 매 세션 bootstrap (self-healing)
+├── settings.json             ← Hook + Skill permission
+├── instincts/                ← 4 seed md (학습 누적)
+└── skills/                   ← 20+ skills
+    ├── <skill>/SKILL.md
+    ├── <skill>/scripts/       (선택)
+    ├── <skill>/references/    (선택, 500 줄+ 분리)
+    ├── <skill>/evals/         (선택, cases.json)
+    ├── skill-gen-agent/       ← validator + test harness (vendored)
+    └── context-guardian/      ← 이 파일을 관리하는 skill
+docs/                          ← INSTALL / MORNING-START / USING-IN-OTHER-REPOS
+scripts/                       ← install.sh, setup-repo.sh
+templates/                     ← CLAUDE.md (global), bootstrap-*.sh
+README.md                      ← 1500+ 줄 beginner 가이드
+CHANGELOG.md                   ← Keep a Changelog
+LICENSE                        ← MIT + upstream credits
+```
+
+## 🚫 금기 (건드리면 안 되는 곳)
+
+- **`.claude/skills/gstack/`** — upstream (garrytan/gstack) 에서 clone. 약 12 MB / 450 파일. **절대 직접 수정하거나 Read 로 스캔 금지.** `.claudeignore` 로 차단됨.
+- **`.claude/skills/gstack/node_modules/`** — bun 이 관리
+- **`.claude.bak-*/`** — 설치 전 백업. 읽기 금지.
+- **기존 base commit 6 파일** (`commit`, `debug`, `explain`, `refactor`, `review`, `test-gen` SKILL.md): description 과 version 은 개선됐지만 본문은 원저자 존중. 본문 재작성 전 사용자 승인 필수.
+
+## 💡 관용 / 컨벤션
+
+- **Skill 수정 후 필수**: `validate_skill.py` 실행 + 0 errors / 0 warnings 확인
+- **새 skill 작성 시**: `evals/cases.json` 에 최소 2 개 test case 포함
+- **Description 작성**:
+  - `"Use when..."` 으로 시작
+  - 한국어 + 영어 트리거 문구 병기
+  - 구체 사용자 구문 포함 ("새 앱 만들자", "debug this" 등)
+  - 400-900 자 사이, state the output
+- **Commit**: Conventional Commits (`feat(skills):`, `fix(hook):`, `docs(readme):`, `chore:`, `test:`)
+- **Skill 이름**: kebab-case, ≤ 64 자, `claude`/`anthropic` 예약어 금지
+- **SKILL.md 본문**: < 500 줄 (400 에서 warning). 넘으면 `references/*.md` 로 분리 + TOC
+
+<!-- context-guardian-rules:v1 -->
+## Context Guardian Rules (auto-maintained)
+
+SessionStart hook 이 매 세션 시작 시 이 블록 존재를 확인하고, 없으면 자동 재삽입합니다 (self-healing).
+
+### 작업 범위 제한
+- 한 세션에서 수정 파일 **최대 5 개**
+- 한 번에 하나의 skill / hook / 문서 단위로만 작업
+- 작업 완료 즉시 `git commit` 후 세션 종료 권고
+
+### 파일 읽기 제한
+- **`.claude/skills/gstack/` 읽기 금지** (12 MB, 450 files — `.claudeignore` 로 차단됨)
+- `.claude.bak-*/`, `/tmp/simon-stack-*.log` 읽기 금지
+- 1000 줄+ 파일은 Read offset+limit 으로 부분 읽기
+- `node_modules/`, `.next/`, `dist/`, `.git/` 목적 없는 스캔 금지
+
+### 작업 요청 방식
+- 광범위 요청 ("전체 skill 개선") → 작은 단위로 분해 후 사용자 확인
+- Plan 모드로 먼저 계획 수립 → 승인 후 실행
+- **이 레포 특이 사항**: tool call 마다 55+ skill description 이 system-reminder 로 반복되어 컨텍스트가 빠르게 쌓임. 따라서:
+  - Bash 호출 **최소화** — 여러 작업을 하나의 Bash 로 배치
+  - `python3 <<PY ... PY` heredoc 으로 여러 파일 생성 batch 처리
+  - Write tool 이 Bash 보다 reminder 가 적음 — 복잡 content 는 Write 선호
+  - 불필요한 Read 금지 (특히 대용량 파일)
+
+### 컨텍스트 보호
+- 80 % 도달 시 `SESSION_RECOVERY.md` 생성 + 새 세션 전환 권고
+- 90 % 도달 시 즉시 작업 마무리 + 새 세션 강제
+
+### 복구 사이클
+- 세션 끊기 전: `bash .claude/skills/context-guardian/scripts/create-recovery.sh`
+- 새 세션 첫 메시지: "SESSION_RECOVERY.md 읽고 이어해줘"
+
+## 📚 이 레포에서 특히 자주 쓰는 skill
+
+- **`skill-gen-agent`** — 모든 skill 수정의 검증 표준
+- **`context-guardian`** — 이 파일이 관리하는 규칙의 source. 세션 시작 시 auto-heal
+- **`commit`** — Conventional Commits 준수
+- **`review`** — PR 사전 리뷰
+- **`simon-tdd`** — 새 script/feature 추가 시 RED-GREEN-REFACTOR
+- **`/ship`** (Gstack) — VERSION + CHANGELOG + push + PR
+
+## 🧠 Instincts (auto-loaded)
+
+`~/.claude/instincts/` 4 개 파일 참조:
+- `mistakes-learned.md` — Claude 실수 누적 (grep -c exit 1, Plan 파일 시크릿 substring 등)
+- `project-patterns.md` — 프로젝트별 관용
+- `korean-context.md` — 한국 API 특이사항
+- `tool-quirks.md` — CLI·하네스 함정
+
+실수 지적 받으면 즉시 `simon-instincts` 로 append.
