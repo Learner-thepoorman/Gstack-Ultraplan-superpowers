@@ -3,6 +3,31 @@
 모든 중요한 변경은 이 파일에 기록합니다.
 형식: [Keep a Changelog](https://keepachangelog.com/), 버전: [SemVer](https://semver.org/).
 
+
+
+## [1.2.0] — 2026-04-14
+
+### Added — Meta + session management
+- **`skill-gen-agent`** — vendored from `github.com/Learner-thepoorman/Skill-Agent`.
+  Provides `validate_skill.py`, `test_skill.py`, `refactor_skill.py`,
+  `version_log.py`, `install_skill.py` scripts + references + templates
+  for creating and improving Claude Code skills from within the repo.
+- **`context-guardian`** — 3-mode skill for Claude Code session health:
+  - Prevention: inserts `<!-- context-guardian-rules:v1 -->` block into
+    CLAUDE.md + generates `.claudeignore` (idempotent)
+  - Monitoring: `context_limit_log.json` with measured-not-hardcoded
+    token limits, `--load` / `--record` / `--check` subcommands,
+    80% / 90% threshold warnings
+  - Recovery: `SESSION_RECOVERY.md` generator with git state auto-fill,
+    secret-pattern abort, ready-to-copy next-session prompt
+- 3 bundled scripts: `install-rules.sh`, `create-recovery.sh`,
+  `update-context-log.sh`
+- `references/templates.md` documenting all 4 output artifacts
+- `evals/cases.json` with 4 test cases per skill
+
+### Validated
+- All 20 skills pass `validate_skill.py` with 0 errors / 0 warnings
+- Both new skills pass `test_skill.py --dry-run`
 ## [1.1.0] — 2026-04-13
 
 ### Added — Repo hygiene + cross-repo distribution

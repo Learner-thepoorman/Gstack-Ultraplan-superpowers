@@ -12,6 +12,20 @@
 | `security-orchestrator` | 보안 감사 5단계 순차 실행 |
 | `autoplan` (Gstack) | CEO/Design/Eng/DX 리뷰 자동 파이프라인 |
 
+
+## 🧪 Meta — skill 제작·검증
+
+| Skill | 역할 |
+|---|---|
+| `skill-gen-agent` | skill 생성·리팩토링·검증·테스트 (Skill-Agent vendored: validate_skill.py · test_skill.py · refactor_skill.py · version_log.py) |
+
+## 🛡️ Session / Context 관리
+
+| Skill | 역할 |
+|---|---|
+| `context-guardian` | 컨텍스트 고갈 예방 + 실측 한도 관리 + 세션 복구 (3 mode: prevention / monitoring / recovery) |
+| `/checkpoint` (Gstack) | 일반 작업 스냅샷 저장·재개 (상호보완) |
+
 ## 📋 Planning (플래닝)
 
 | Skill | 역할 |
