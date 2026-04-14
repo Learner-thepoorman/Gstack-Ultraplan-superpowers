@@ -1,6 +1,8 @@
 ---
 name: refactor
-description: Improve the structure of existing code without changing its behavior. Use when the user asks to refactor, clean up, simplify, or restructure code.
+description: Use when the user asks to refactor, clean up, simplify, or restructure code—triggers include "refactor", "리팩토링", "clean up", "simplify this", "이거 정리해줘", "extract function", "rename variable". Produces structural improvements that preserve behavior, verified by the existing test suite.
+version: 1.0.0
+author: general-dev
 ---
 
 # Refactor Skill

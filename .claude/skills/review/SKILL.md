@@ -1,6 +1,8 @@
 ---
 name: review
-description: Perform a thorough code review on changes, files, or pull requests. Use when the user asks for a code review, feedback on code, or wants to check a diff before committing.
+description: Use when the user asks for a code review or feedback on code—triggers include "review this", "code review", "리뷰해줘", "check this code", "feedback on my code", "is this good". Produces a prioritized review with severity levels (blocker / major / minor / nit) and actionable fix suggestions.
+version: 1.0.0
+author: general-dev
 ---
 
 # Code Review Skill

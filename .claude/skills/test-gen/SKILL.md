@@ -1,6 +1,8 @@
 ---
 name: test-gen
-description: Generate meaningful unit, integration, or regression tests for existing code. Use when the user asks to write tests, add test coverage, or create a test for a specific function/module.
+description: Use when the user asks to write tests, add test coverage, or create a test for a function or module—triggers include "테스트 작성", "write tests", "add test coverage", "test this function", "unit tests", "regression test". Produces meaningful deterministic tests covering the golden path, edge cases, and error paths.
+version: 1.0.0
+author: general-dev
 ---
 
 # Test Generation Skill

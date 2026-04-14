@@ -1,6 +1,8 @@
 ---
 name: explain
-description: Explain how a piece of code, file, module, or system works. Use when the user asks "how does X work", "what does this do", "walk me through", or wants a code/architecture explanation.
+description: Use when the user asks "how does X work", "walk me through", "explain this code", "이 코드 설명해줘", "what does this do", "이게 뭐하는거야"—or wants to understand unfamiliar code, a module, or a system. Produces a structured walkthrough: entry points, data flow, key invariants, and where to make changes.
+version: 1.0.0
+author: general-dev
 ---
 
 # Explain Skill

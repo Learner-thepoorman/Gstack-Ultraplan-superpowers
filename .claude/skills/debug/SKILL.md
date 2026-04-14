@@ -1,6 +1,8 @@
 ---
 name: debug
-description: Systematically diagnose and fix bugs by reproducing, isolating, and identifying root causes. Use when the user reports an error, unexpected behavior, failing test, or asks to debug something.
+description: Use when the user reports an error, unexpected behavior, failing test, or asks to debug something—triggers include "디버깅", "버그 고쳐줘", "이게 왜 안 돼", "debug this", "fix this error", "why is X broken", "tests failing". Produces a root-cause diagnosis with the specific fix applied and verification that the bug no longer reproduces.
+version: 1.0.0
+author: general-dev
 ---
 
 # Debug Skill
