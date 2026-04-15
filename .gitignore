@@ -67,3 +67,8 @@ __pycache__/
 SESSION_RECOVERY.md
 context_limit_log.json
 CLAUDE.md.bak-*
+
+# Harness / Wiki (user-local overrides)
+# state.json + plan.md + wiki/ are committed. Local overrides are ignored.
+.harness/*.local.*
+.harness/**/*.local.*
