@@ -5,7 +5,7 @@ Claude Code reads this file at session start. This is a **skill development repo
 ## 🎯 작업 맥락
 
 이 레포의 주 작업:
-- **Skill 작성·수정·검증** (`.claude/skills/<name>/SKILL.md`)
+- **Skill 작성·수정·검증** (`skills-src/<name>/SKILL.md` 또는 `.claude/skills/<name>/SKILL.md`)
 - **Hook·script 개선** (`.claude/hooks/`, `scripts/`)
 - **README·docs 유지보수**
 - **Instincts seed 갱신** (`.claude/instincts/`)
@@ -17,17 +17,18 @@ Claude Code reads this file at session start. This is a **skill development repo
 Skill 수정 후 **반드시** 아래를 실행:
 
 ```bash
-# 단일 skill 검증
-python3 .claude/skills/skill-gen-agent/scripts/validate_skill.py .claude/skills/<name>
+# 단일 skill 검증 (skills-src/ 또는 .claude/skills/ 경로)
+python3 .claude/skills/skill-gen-agent/scripts/validate_skill.py skills-src/<name>
 
-# 전체 repo 검증 (모든 skill 한 번에)
-for d in .claude/skills/*/; do
+# 전체 repo 검증 (skills-src/ + .claude/skills/ 모두)
+for d in skills-src/*/ .claude/skills/*/; do
+  [ -f "${d}SKILL.md" ] || continue
   python3 .claude/skills/skill-gen-agent/scripts/validate_skill.py "${d%/}" 2>&1 | grep Result
 done
 
 # JSON cases dry-run
 python3 .claude/skills/skill-gen-agent/scripts/test_skill.py \
-  .claude/skills/<name> --cases .claude/skills/<name>/evals/cases.json --dry-run
+  skills-src/<name> --cases skills-src/<name>/evals/cases.json --dry-run
 
 # Skill-Agent 통합 테스트 (24 checks)
 python3 .claude/skills/skill-gen-agent/scripts/tests/run_all.py
@@ -36,12 +37,18 @@ python3 .claude/skills/skill-gen-agent/scripts/tests/run_all.py
 CLAUDE_PROJECT_DIR=$PWD CLAUDE_CODE_REMOTE=true bash .claude/hooks/session-start.sh
 
 # Bash 스크립트 문법 체크
-for f in scripts/*.sh .claude/hooks/*.sh .claude/skills/*/scripts/*.sh; do
-  bash -n "$f" && echo "OK: $f"
+for f in scripts/*.sh .claude/hooks/*.sh .claude/skills/*/scripts/*.sh skills-src/*/scripts/*.sh; do
+  [ -f "$f" ] || continue; bash -n "$f" && echo "OK: $f"
 done
 
-# YAML frontmatter 파싱
-python3 -c "import yaml, pathlib; [yaml.safe_load(open(p).read().split('---')[1]) for p in pathlib.Path('.claude/skills').rglob('SKILL.md')]; print('YAML OK')"
+# YAML frontmatter 파싱 (skills-src/ + .claude/skills/)
+python3 -c "
+import yaml, pathlib
+for base in ['skills-src', '.claude/skills']:
+  for p in pathlib.Path(base).rglob('SKILL.md'):
+    yaml.safe_load(open(p).read().split('---')[1])
+print('YAML OK')
+"
 ```
 
 **원칙**: Claude 가 눈으로 확인할 수 없으면 = 검증 실패. 사용자에게 "확인해 주세요" 라고 말하지 말고 위 명령을 실행하세요.
@@ -49,31 +56,39 @@ python3 -c "import yaml, pathlib; [yaml.safe_load(open(p).read().split('---')[1]
 ## 📂 디렉토리 구조
 
 ```
+skills-src/                    ← 배포용 skill 소스 (16개, Claude Code 미로딩)
+├── app-dev-orchestrator/
+├── simon-tdd/
+├── ... (배포 대상 skill)
+
 .claude/
 ├── hooks/session-start.sh   ← 매 세션 bootstrap (self-healing)
 ├── settings.json             ← Hook + Skill permission
 ├── instincts/                ← 4 seed md (학습 누적)
-└── skills/                   ← 20+ skills
-    ├── <skill>/SKILL.md
-    ├── <skill>/scripts/       (선택)
-    ├── <skill>/references/    (선택, 500 줄+ 분리)
-    ├── <skill>/evals/         (선택, cases.json)
-    ├── skill-gen-agent/       ← validator + test harness (vendored)
-    └── context-guardian/      ← 이 파일을 관리하는 skill
+└── skills/                   ← 개발용 skill (4개만, Claude Code 로딩)
+    ├── commit/               ← 커밋 워크플로
+    ├── review/               ← 코드 리뷰
+    ├── skill-gen-agent/      ← validator + test harness (vendored)
+    └── context-guardian/     ← 세션 보호
+
 docs/                          ← INSTALL / MORNING-START / USING-IN-OTHER-REPOS
 scripts/                       ← install.sh, setup-repo.sh
 templates/                     ← CLAUDE.md (global), bootstrap-*.sh
-README.md                      ← 1500+ 줄 beginner 가이드
+README.md
 CHANGELOG.md                   ← Keep a Changelog
 LICENSE                        ← MIT + upstream credits
 ```
+
+> **왜 분리?** `.claude/skills/` 에 skill 이 많으면 매 tool call 마다 모든 description 이
+> system-reminder 로 주입되어 토큰이 폭발한다. `skills-src/` 는 Claude Code 가 무시하므로
+> 개발 중 토큰 사용량이 극적으로 줄어든다. 설치 시 hook 이 양쪽 모두 복사.
 
 ## 🚫 금기 (건드리면 안 되는 곳)
 
 - **`.claude/skills/gstack/`** — upstream (garrytan/gstack) 에서 clone. 약 12 MB / 450 파일. **절대 직접 수정하거나 Read 로 스캔 금지.** `.claudeignore` 로 차단됨.
 - **`.claude/skills/gstack/node_modules/`** — bun 이 관리
 - **`.claude.bak-*/`** — 설치 전 백업. 읽기 금지.
-- **기존 base commit 6 파일** (`commit`, `debug`, `explain`, `refactor`, `review`, `test-gen` SKILL.md): description 과 version 은 개선됐지만 본문은 원저자 존중. 본문 재작성 전 사용자 승인 필수.
+- **기존 base commit 6 파일** (`commit`, `debug`, `explain`, `refactor`, `review`, `test-gen` SKILL.md): description 과 version 은 개선됐지만 본문은 원저자 존중. 본문 재작성 전 사용자 승인 필수. (4개는 `.claude/skills/`, 나머지는 `skills-src/` 에 위치)
 
 ## 💡 관용 / 컨벤션
 

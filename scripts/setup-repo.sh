@@ -135,11 +135,14 @@ if [ -d ~/.claude/skills/gstack ]; then
 fi
 
 # --- simon-stack skills from THIS repo ---
-for d in "$REPO_DIR"/.claude/skills/*/; do
-  name=$(basename "$d")
-  [ -f "$d/SKILL.md" ] || continue
-  [ -e ~/.claude/skills/"$name" ] && continue
-  cp -r "$d" ~/.claude/skills/"$name"
+for src_dir in "$REPO_DIR"/skills-src "$REPO_DIR"/.claude/skills; do
+  [ -d "$src_dir" ] || continue
+  for d in "$src_dir"/*/; do
+    name=$(basename "$d")
+    [ -f "$d/SKILL.md" ] || continue
+    [ -e ~/.claude/skills/"$name" ] && continue
+    cp -r "$d" ~/.claude/skills/"$name"
+  done
 done
 
 # --- INDEX + instincts ---
@@ -163,17 +166,20 @@ HOOK_EOF
   chmod +x .claude/hooks/session-start.sh
   log "✅ Hook installed: .claude/hooks/session-start.sh"
 
-  # 2. Copy simon-stack skills
+  # 2. Copy simon-stack skills (from both skills-src/ and .claude/skills/)
   copied=0
-  for d in "$SIMON_STACK_DIR"/.claude/skills/*/; do
-    name=$(basename "$d")
-    [ -f "$d/SKILL.md" ] || continue
-    if [ -e ".claude/skills/$name" ]; then
-      log "  skip (exists): $name"
-      continue
-    fi
-    cp -r "$d" ".claude/skills/$name"
-    copied=$((copied + 1))
+  for src_dir in "$SIMON_STACK_DIR"/skills-src "$SIMON_STACK_DIR"/.claude/skills; do
+    [ -d "$src_dir" ] || continue
+    for d in "$src_dir"/*/; do
+      name=$(basename "$d")
+      [ -f "$d/SKILL.md" ] || continue
+      if [ -e ".claude/skills/$name" ]; then
+        log "  skip (exists): $name"
+        continue
+      fi
+      cp -r "$d" ".claude/skills/$name"
+      copied=$((copied + 1))
+    done
   done
   log "✅ Copied $copied skills to .claude/skills/"
 

@@ -78,16 +78,18 @@ if [ -d ~/.claude/skills/gstack ]; then
 fi
 
 # --- 3. simon-stack skills from this repo ---
-log "Copying simon-stack skills from $REPO_DIR/.claude/skills/..."
+# Source: skills-src/ (distributable) + .claude/skills/ (dev-essential)
+log "Copying simon-stack skills..."
 count=0
-for d in "$REPO_DIR"/.claude/skills/*/; do
-  name=$(basename "$d")
-  [ -f "$d/SKILL.md" ] || continue
-  if [ -e ~/.claude/skills/"$name" ]; then
-    continue  # preserve Gstack version if name collision
-  fi
-  cp -r "$d" ~/.claude/skills/"$name"
-  count=$((count + 1))
+for src_dir in "$REPO_DIR"/skills-src "$REPO_DIR"/.claude/skills; do
+  [ -d "$src_dir" ] || continue
+  for d in "$src_dir"/*/; do
+    name=$(basename "$d")
+    [ -f "$d/SKILL.md" ] || continue
+    [ -e ~/.claude/skills/"$name" ] && continue
+    cp -r "$d" ~/.claude/skills/"$name"
+    count=$((count + 1))
+  done
 done
 log "Copied $count simon-stack skills"
 
