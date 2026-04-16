@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>술법 목록 — SimonK Stack</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav scrolled"><div class="nav-inner">
+<a href="index.html" class="nav-logo">SimonK Stack</a>
+<div class="nav-links" id="navLinks">
+<a href="index.html">돌아가기</a>
+<a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers" target="_blank" rel="noopener">GitHub →</a>
+</div>
+</div></nav>
+
+<header class="hero" style="min-height:auto;padding:7rem 1.5rem 2rem">
+<div class="hero-text">
+<p class="hero-label">術 法 全 書</p>
+<h1>SimonK Stack 전체 술법</h1>
+<p class="hero-sub">20개 simon-stack skill + 36개 Gstack skill</p>
+</div>
+</header>
+
+<div class="scroll-divider"><span>卷 一 · 지휘 (Orchestrator)</span></div>
+
+<section class="section"><div class="container">
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">統</span><div><h3>app-dev-orchestrator</h3><p class="skill-trigger">"새 앱 만들자" · "MVP 기획"</p></div></div>
+<p class="skill-body">제로베이스 앱 개발 전 과정을 지휘합니다. 인터뷰 → 리서치 → 플래닝 → 디자인 → TDD 구현 → 보안 감사 → 배포 → 회고까지 21단계 순차 실행. 이 skill 자체는 코드를 쓰지 않고 다른 skill을 호출하는 지휘자입니다.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">守</span><div><h3>security-orchestrator</h3><p class="skill-trigger">"보안 점검" · "security audit"</p></div></div>
+<p class="skill-body">5단계 적대적 보안 감사. RLS → IDOR 스캔 → 결제 API 방어 → 인프라 감사 → 적대적 리뷰. 심각도별 통합 리포트 생성. Critical/High 모두 해결될 때까지 수정 루프.</p></div>
+
+</div></section>
+
+<div class="scroll-divider"><span>卷 二 · 보안 (Security)</span></div>
+
+<section class="section"><div class="container">
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">門</span><div><h3>security-checklist</h3><p class="skill-trigger">"RLS 확인" · "rate limit 점검"</p></div></div>
+<p class="skill-body">4대 보안 구조 적대적 감사. RLS, 구독 상태 변조 방지, 이중 Rate Limit(user+IP), 예산 한도 3계층. 각 영역 5개 공격 시나리오 SQL 제공.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">權</span><div><h3>authz-designer</h3><p class="skill-trigger">"권한 시스템 설계" · "RBAC"</p></div></div>
+<p class="skill-body">프로젝트에 맞는 권한 모델 선택 (RBAC/ABAC/ReBAC/Hybrid) + 4개 테이블 DDL 템플릿. 기존 코드 IDOR·권한 상승 감사.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">金</span><div><h3>paid-api-guard</h3><p class="skill-trigger">"Stripe 연동" · "결제 API 보안"</p></div></div>
+<p class="skill-body">유료 API 6층 방어. 네트워크 경계 → 서명·멱등성 → 남용 탐지 → 결제 전용 → 키 탈취 대응 → 관측. 5가지 적대적 테스트 포함.</p></div>
+
+</div></section>
+
+<div class="scroll-divider"><span>卷 三 · 방법론 (Method)</span></div>
+
+<section class="section"><div class="container">
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">試</span><div><h3>simon-tdd</h3><p class="skill-trigger">"이 기능 구현해줘" · "버그 고쳐줘"</p></div></div>
+<p class="skill-body">RED → GREEN → REFACTOR 사이클 강제. 실패하는 테스트 먼저, 최소 코드로 통과, 구조 개선. 사후 정당화 테스트 금지. 검증 도구 명시 요구 (Boris Cherny 원칙).</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">記</span><div><h3>simon-instincts</h3><p class="skill-trigger">"이거 또 틀렸어" · "기록해둬"</p></div></div>
+<p class="skill-body">Claude 실수를 4개 파일에 누적. mistakes-learned, project-patterns, korean-context, tool-quirks. 세션 시작 시 자동 로드. 세션이 쌓일수록 정확해짐.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">探</span><div><h3>simon-research</h3><p class="skill-trigger">"리서치 해줘" · "기술 비교"</p></div></div>
+<p class="skill-body">플래닝 전 외부 리서치 의무화. 공식 문서 + 경쟁 제품 3개 비교 + 최근 6개월 블로그. 출처 없는 주장·AI 요약 기사 거부.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">分</span><div><h3>simon-worktree</h3><p class="skill-trigger">"병렬 작업" · "parallel agents"</p></div></div>
+<p class="skill-body">병렬 Claude 세션을 git worktree로 격리. 동일 브랜치 동시 작업 충돌 방지. .env 처리, 네이밍 규칙, 완료 후 정리까지.</p></div>
+
+</div></section>
+
+<div class="scroll-divider"><span>卷 四 · 도구 (Tools)</span></div>
+
+<section class="section"><div class="container">
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">速</span><div><h3>nextjs-optimizer</h3><p class="skill-trigger">"Next.js 최적화" · "LCP 개선"</p></div></div>
+<p class="skill-body">Next.js 13+ App Router 5대 성능 영역 감사. 이미지, 렌더링 전략, 코드 분할, 서드파티 스크립트, 데이터 캐싱. LCP &lt; 2.5s / CLS &lt; 0.1 목표.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">畵</span><div><h3>stitch-design-flow</h3><p class="skill-trigger">"디자인 시안" · "Stitch 프롬프트"</p></div></div>
+<p class="skill-body">Google Stitch용 디자인 프롬프트 생성기. DESIGN.md에서 브랜드 요소를 추출해 Safe/Bold/Wild 3가지 방향 프롬프트 생성. API 없음, 순수 텍스트.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">文</span><div><h3>project-context-md</h3><p class="skill-trigger">"CLAUDE.md 만들어줘"</p></div></div>
+<p class="skill-body">프로젝트 CLAUDE.md 생성/갱신. 검증 도구(서버·테스트·브라우저) 명시가 핵심. Boris Cherny 검증 루프 원칙의 실현.</p></div>
+
+</div></section>
+
+<div class="scroll-divider"><span>卷 五 · 기반 (Meta)</span></div>
+
+<section class="section"><div class="container">
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">造</span><div><h3>skill-gen-agent</h3><p class="skill-trigger">"스킬 만들어줘" · "validate skill"</p></div></div>
+<p class="skill-body">Skill 생성·검증·리팩토링·테스트 도구. validate_skill.py로 kebab-case, 500줄 한도, description 점수, 깨진 링크 등 검사.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">護</span><div><h3>context-guardian</h3><p class="skill-trigger">"세션 복구" · "context 위험해"</p></div></div>
+<p class="skill-body">컨텍스트 고갈 3단계 대응. Prevention(CLAUDE.md 규칙), Monitoring(80%/90% 경고), Recovery(SESSION_RECOVERY.md 생성).</p></div>
+
+</div></section>
+
+<div class="scroll-divider"><span>卷 六 · 일반 (General)</span></div>
+
+<section class="section"><div class="container">
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">印</span><div><h3>commit</h3><p class="skill-trigger">"커밋해줘"</p></div></div>
+<p class="skill-body">Conventional Commits 형식. type(scope): subject.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">診</span><div><h3>debug</h3><p class="skill-trigger">"버그 고쳐줘" · "이게 왜 안 돼"</p></div></div>
+<p class="skill-body">근본 원인 진단 + 수정 + 재현 불가 확인.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">解</span><div><h3>explain</h3><p class="skill-trigger">"이 코드 설명해줘"</p></div></div>
+<p class="skill-body">entry point, 데이터 플로우, 불변식, 수정 지점 워크스루.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">整</span><div><h3>refactor</h3><p class="skill-trigger">"리팩토링" · "clean up"</p></div></div>
+<p class="skill-body">동작 보존 구조 개선. 기존 테스트 통과 확인.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">審</span><div><h3>review</h3><p class="skill-trigger">"리뷰해줘" · "code review"</p></div></div>
+<p class="skill-body">blocker / major / minor / nit 우선순위 리뷰.</p></div>
+
+<div class="skill-detail"><div class="skill-header"><span class="skill-hanja">驗</span><div><h3>test-gen</h3><p class="skill-trigger">"테스트 작성" · "unit tests"</p></div></div>
+<p class="skill-body">골든 패스 + 엣지 케이스 + 에러 경로 테스트 생성.</p></div>
+
+</div></section>
+
+<div class="scroll-divider"><span>卷 七 · Gstack 36술</span></div>
+
+<section class="section"><div class="container">
+<p class="section-sub">Gstack (garrytan/gstack) — 실행 파이프라인. simon-stack이 방법론을 정의하고 Gstack이 실행합니다.</p>
+
+<div class="gstack-grid">
+<div class="gs-group"><h3>플래닝</h3><p>/office-hours · /plan-ceo-review · /plan-eng-review · /plan-design-review · /plan-devex-review · /autoplan</p></div>
+<div class="gs-group"><h3>디자인</h3><p>/design-consultation · /design-shotgun · /design-review · /design-html</p></div>
+<div class="gs-group"><h3>구현·QA</h3><p>/qa · /qa-only · /review · /benchmark · /health · /codex</p></div>
+<div class="gs-group"><h3>배포</h3><p>/ship · /land-and-deploy · /canary · /setup-deploy · /document-release</p></div>
+<div class="gs-group"><h3>보안·품질</h3><p>/cso · /careful · /guard · /freeze · /unfreeze · /retro</p></div>
+<div class="gs-group"><h3>리서치·DX</h3><p>/investigate · /browse · /learn · /devex-review</p></div>
+<div class="gs-group"><h3>기타</h3><p>/checkpoint · /pair-agent · /setup-browser-cookies · /open-gstack-browser · /gstack-upgrade</p></div>
+</div>
+
+</div></section>
+
+<div class="scroll-divider"><span>謝 · 감사</span></div>
+
+<section class="section"><div class="container">
+<h2>Thanks to</h2>
+<p class="section-sub">SimonK Stack을 만드는 데 영감과 도움을 준 프로젝트들</p>
+
+<div class="thanks-list">
+<div class="thanks-item">
+<h3>Gstack</h3>
+<p>garrytan — 실행 파이프라인 36개 skill. /ship, /qa, /cso, /retro 등 실제 작업을 수행하는 엔진.</p>
+<a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener" class="btn">GitHub →</a>
+</div>
+<div class="thanks-item">
+<h3>Superpowers</h3>
+<p>obra — TDD 사이클 강제, git worktree 격리, 검증 루프 철학의 원류.</p>
+<a href="https://github.com/obra/superpowers" target="_blank" rel="noopener" class="btn">GitHub →</a>
+</div>
+<div class="thanks-item">
+<h3>everything-claude-code</h3>
+<p>affaan-m — Instincts 누적 학습 개념, research-first 원칙의 영감.</p>
+<a href="https://github.com/affaan-m/everything-claude-code" target="_blank" rel="noopener" class="btn">GitHub →</a>
+</div>
+<div class="thanks-item">
+<h3>Skill-Agent</h3>
+<p>Learner-thepoorman — validate_skill.py, test_skill.py 등 skill 검증 도구.</p>
+<a href="https://github.com/Learner-thepoorman/Skill-Agent" target="_blank" rel="noopener" class="btn">GitHub →</a>
+</div>
+<div class="thanks-item">
+<h3>Impeccable</h3>
+<p>pbakaus — AI Slop 방지 디자인 원칙. tinted neutrals, 폰트 경고 등.</p>
+<a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener" class="btn">GitHub →</a>
+</div>
+<div class="thanks-item">
+<h3>Supanova Design Skill</h3>
+<p>uxjoseph — 프리미엄 랜딩 페이지 생성 프레임워크. Pretendard + Tailwind 기반.</p>
+<a href="https://github.com/uxjoseph/supanova-design-skill" target="_blank" rel="noopener" class="btn">GitHub →</a>
+</div>
+<div class="thanks-item">
+<h3>Boris Cherny 5원칙</h3>
+<p>Claude Code PM — Plan 모드 기본, 병렬은 worktree, 검증 루프=도구 제공, skip-permissions 금지, CLAUDE.md 팀 체크인.</p>
+</div>
+</div>
+
+</div></section>
+
+<footer class="footer"><div class="container footer-inner">
+<span class="footer-logo">SimonK Stack</span>
+<div class="footer-links">
+<a href="index.html">메인</a>
+<a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers" target="_blank" rel="noopener">GitHub</a>
+</div>
+<span class="footer-copy">MIT License · 2026</span>
+</div></footer>
+
+</body>
+</html>
