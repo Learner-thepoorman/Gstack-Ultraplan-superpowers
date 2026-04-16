@@ -8,23 +8,20 @@
     "status": "in_progress",
     "started": "2026-04-15",
     "phases": {
-      "A_harness_scaffold": "in_progress",
-      "B_new_skills": "pending",
+      "A_harness_scaffold": "completed",
+      "B_new_skills": "completed",
       "C_existing_skill_updates": "pending",
       "D_validate_commit_push": "pending"
     }
   },
   "counters": {
-    "skills_total": 20,
+    "skills_total": 23,
     "skills_target_v1_3": 23,
     "decisions": 4,
     "concepts": 5,
     "agents": 3
   },
   "pending_tasks": [
-    "B-1: create .claude/skills/harness-wiki-setup/ skill",
-    "B-2: create .claude/skills/design-anti-slop/ skill (fetch Impeccable + Supernova refs)",
-    "B-3: create .claude/skills/codex-review/ wrapper skill",
     "C-1: wire harness-wiki-setup + design-anti-slop into app-dev-orchestrator stages",
     "C-2: add codex-review reference to review + simon-tdd skills",
     "C-3: update .claude/skills/INDEX.md with new categories",
@@ -32,7 +29,8 @@
     "D-2: CHANGELOG v1.3.0 + README skill count update (20 -> 23)"
   ],
   "notes": {
-    "unpushed_commits": "1915901 (rename migration) blocked by HTTP 503",
+    "phase_A_wiki_scaffold": "plan.md + state.json created; wiki/ dirs deferred to harness-wiki-setup skill dogfood",
+    "phase_B_skills_created": "harness-wiki-setup, design-anti-slop, codex-review — all 0 errors 0 warnings",
     "context_guardian_marker": "CLAUDE.md must preserve <!-- context-guardian-rules:v1 -->",
     "forbidden_paths": [
       ".claude/skills/gstack/",

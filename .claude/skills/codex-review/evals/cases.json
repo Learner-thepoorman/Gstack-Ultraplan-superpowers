@@ -1,0 +1,27 @@
+{
+  "skill": "codex-review",
+  "version": "1.0.0",
+  "cases": [
+    {
+      "id": "review-mode-pre-ship",
+      "prompt": "codex review 해줘. PR 올리기 전에 한번 봐줘.",
+      "assertions": [
+        { "id": "prepares-context", "text": "The agent extracts the diff (git diff main...HEAD) and project stack info from CLAUDE.md." },
+        { "id": "delegates-to-gstack", "text": "The agent invokes Gstack /codex skill with 'review' mode and the prepared context." },
+        { "id": "interprets-result", "text": "The agent interprets the Codex response and presents findings with severity tags (blocker/major/minor/nit)." },
+        { "id": "pass-fail-verdict", "text": "The agent provides a clear PASS or FAIL verdict." },
+        { "id": "handles-missing-codex", "text": "If Codex CLI is not installed, the agent provides installation instructions." }
+      ]
+    },
+    {
+      "id": "challenge-mode-adversarial",
+      "prompt": "이 코드 codex 한테 도전시켜봐. 깨뜨릴 수 있는지 보자.",
+      "assertions": [
+        { "id": "sends-full-code", "text": "The agent sends the full file contents (not just diff) to Codex with adversarial prompt." },
+        { "id": "reports-vulnerabilities", "text": "The agent reports any bugs, edge cases, or security issues found." },
+        { "id": "assesses-severity", "text": "Each finding includes a severity assessment." },
+        { "id": "handles-disagreement", "text": "If Claude disagrees with a Codex finding, it presents both perspectives to the user." }
+      ]
+    }
+  ]
+}

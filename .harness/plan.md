@@ -17,24 +17,23 @@ Goal: adopt the Harness + LLM Wiki pattern (decisions/concepts/agents separation
 - [x] Inject `## 🗂 Wiki Index` section into repo CLAUDE.md (preserving context-guardian marker)
 - [x] Commit + push
 
-### Phase B — New skills (next session)
+### Phase B — New skills ✅
 
-- [ ] `harness-wiki-setup` — 5-phase RECON → SCAFFOLD → POPULATE → VALIDATE → REPORT workflow
-  - [ ] `scripts/scaffold.sh` (idempotent, marker-based)
-  - [ ] `scripts/validate-wiki.sh`
-  - [ ] `references/wiki-structure.md`
-  - [ ] `references/state-json-schema.md`
-  - [ ] `evals/cases.json` (2+ test cases)
-- [ ] `design-anti-slop` — reference-first, 3-color, 5-step landing
-  - [ ] Fetch `github.com/pbakaus/impeccable` + `github.com/uxjoseph/supanova-design-skill`
-  - [ ] Extract core principles into `references/design-philosophy.md`
-  - [ ] `references/landing-page-anatomy.md` (Feature-Showcase-UseCase-CTA-Footer)
-  - [ ] `references/reference-sources.md` (dribbble / awwwards / 21st.dev)
-  - [ ] `evals/cases.json`
-- [ ] `codex-review` wrapper
-  - [ ] Delegate to Gstack `/codex` slash command
-  - [ ] Define handoff contract (what context to pass, what to expect back)
-  - [ ] `evals/cases.json`
+- [x] `harness-wiki-setup` — 5-phase RECON → SCAFFOLD → POPULATE → VALIDATE → REPORT workflow
+  - [x] `scripts/scaffold.sh` (idempotent, marker-based)
+  - [x] `scripts/validate-wiki.sh`
+  - [x] `references/wiki-structure.md`
+  - [x] `references/state-json-schema.md`
+  - [x] `evals/cases.json` (3 test cases)
+- [x] `design-anti-slop` — reference-first, 3-color, 5-step landing
+  - [x] Core principles in `references/design-philosophy.md`
+  - [x] `references/landing-page-anatomy.md` (Hero-Features-SocialProof-HowItWorks-CTA)
+  - [x] `references/reference-sources.md` (dribbble / awwwards / 21st.dev + more)
+  - [x] `evals/cases.json` (2 test cases)
+- [x] `codex-review` wrapper
+  - [x] Delegate to Gstack `/codex` slash command
+  - [x] Define handoff contract (what context to pass, what to expect back)
+  - [x] `evals/cases.json` (2 test cases)
 
 ### Phase C — Integration (next session)
 

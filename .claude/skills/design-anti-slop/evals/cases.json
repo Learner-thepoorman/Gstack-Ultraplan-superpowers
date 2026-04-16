@@ -1,0 +1,29 @@
+{
+  "skill": "design-anti-slop",
+  "version": "1.0.0",
+  "cases": [
+    {
+      "id": "landing-page-review",
+      "prompt": "이 랜딩 페이지 디자인이 AI 느낌 나는지 확인해줘",
+      "assertions": [
+        { "id": "runs-checklist", "text": "The agent runs the 10-point slop detection checklist against the design." },
+        { "id": "scores-result", "text": "The agent provides a numeric score (0-10) with per-item PASS/FAIL." },
+        { "id": "identifies-specific-issues", "text": "For each FAIL, the agent names the specific slop signal and suggests a concrete fix." },
+        { "id": "references-principles", "text": "The agent references core principles (3-color, spacing rhythm, etc.) when critiquing." },
+        { "id": "suggests-references", "text": "The agent suggests looking at specific reference sources for inspiration." }
+      ]
+    },
+    {
+      "id": "design-from-scratch",
+      "prompt": "새 SaaS 랜딩 페이지 디자인 해줘. AI 느낌 없게.",
+      "assertions": [
+        { "id": "collects-references-first", "text": "Before generating any design, the agent asks for or suggests reference sites to review." },
+        { "id": "applies-3-color", "text": "The design uses maximum 3 non-neutral colors." },
+        { "id": "follows-5-step", "text": "The landing page follows the 5-section structure (Hero, Features, Social Proof, How It Works, CTA)." },
+        { "id": "avoids-gradient-blobs", "text": "No decorative gradient backgrounds in the design." },
+        { "id": "specific-copy", "text": "Copy uses specific outcomes, not generic 'Transform your workflow' language." },
+        { "id": "self-checks", "text": "The agent runs the slop checklist on its own output before presenting." }
+      ]
+    }
+  ]
+}

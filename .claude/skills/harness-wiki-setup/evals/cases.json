@@ -1,0 +1,40 @@
+{
+  "skill": "harness-wiki-setup",
+  "version": "1.0.0",
+  "cases": [
+    {
+      "id": "fresh-project-scaffold",
+      "prompt": "이 프로젝트에 harness wiki 구조를 설치해줘",
+      "assertions": [
+        { "id": "runs-scaffold", "text": "The agent runs scripts/scaffold.sh which creates .harness/wiki/{decisions,concepts,agents}/ directories." },
+        { "id": "creates-state-json", "text": "state.json is created with project name, version, and sprint fields." },
+        { "id": "creates-plan-md", "text": "plan.md is created with a basic task queue template." },
+        { "id": "creates-index-md", "text": "wiki/INDEX.md is created with a navigation table and usage rules." },
+        { "id": "creates-templates", "text": "Each subdirectory (decisions, concepts, agents) has a _TEMPLATE.md file." },
+        { "id": "gitignore-updated", "text": ".gitignore includes .harness/*.local.* pattern." },
+        { "id": "runs-validate", "text": "The agent runs scripts/validate-wiki.sh and reports PASS or WARN." },
+        { "id": "reports-summary", "text": "The agent provides a summary of created files and next steps." }
+      ]
+    },
+    {
+      "id": "existing-harness-idempotent",
+      "prompt": "harness setup 다시 실행해줘. 이미 .harness/ 디렉토리가 있어.",
+      "assertions": [
+        { "id": "detects-existing", "text": "The agent detects existing .harness/ and reports RECON findings." },
+        { "id": "skips-existing", "text": "scaffold.sh skips already-existing directories and files (SKIP messages)." },
+        { "id": "no-overwrite", "text": "Existing state.json, plan.md, and INDEX.md are NOT overwritten." },
+        { "id": "validates-after", "text": "The agent runs validate-wiki.sh to confirm structure integrity." }
+      ]
+    },
+    {
+      "id": "claude-md-integration",
+      "prompt": "CLAUDE.md에 wiki index 섹션을 추가해줘",
+      "assertions": [
+        { "id": "checks-marker", "text": "The agent checks for <!-- harness-wiki:v1 --> marker in CLAUDE.md." },
+        { "id": "adds-section", "text": "If marker is absent, adds the wiki index section with proper markers." },
+        { "id": "preserves-guardian", "text": "The <!-- context-guardian-rules:v1 --> marker and its content are preserved." },
+        { "id": "idempotent-rerun", "text": "Running again does not duplicate the wiki index section." }
+      ]
+    }
+  ]
+}
