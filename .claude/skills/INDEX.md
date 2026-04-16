@@ -2,7 +2,7 @@
 
 이 환경에 설치된 모든 skill 의 카테고리별 맵. 세션 시작 시 참고용.
 
-**총 51개** skill (Gstack 36 + simon-stack 13 + 기타 2).
+**총 54개** skill (Gstack 36 + simon-stack 16 + 기타 2).
 
 ## 🧭 Orchestrators (상위 지휘)
 
@@ -46,6 +46,7 @@
 | `design-shotgun` (Gstack) | 디자인 변형 탐색 |
 | `design-review` (Gstack) | 시각 QA, AI slop 탐지 |
 | `design-html` (Gstack) | production HTML/CSS 변환 |
+| `design-anti-slop` | AI 슬롭 방지 — 레퍼런스 우선·3색·5단계 랜딩 |
 
 ## 🛠️ Implementation
 
@@ -69,6 +70,7 @@
 | `health` (Gstack) | 코드 품질 대시보드 |
 | `benchmark` (Gstack) | Core Web Vitals 성능 측정 |
 | `devex-review` (Gstack) | 개발자 경험 실측 |
+| `codex-review` | Codex CLI 독립 리뷰 wrapper (handoff contract) |
 | `browse` (Gstack) | 헤드리스 브라우저 검증 |
 
 ## 🔒 Security
@@ -121,6 +123,7 @@
 | `loop` | 주기 작업 실행 |
 | `update-config` | settings.json 구성 |
 | `keybindings-help` | 키바인딩 커스터마이징 |
+| `harness-wiki-setup` | .harness/wiki/ LLM 지식 베이스 설치 |
 | `session-start-hook` | 세션 시작 hook 관리 |
 | `pair-agent` (Gstack) | 원격 에이전트 페어링 |
 | `setup-browser-cookies` (Gstack) | 브라우저 쿠키 가져오기 |

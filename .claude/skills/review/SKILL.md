@@ -60,3 +60,9 @@ Provide actionable, prioritized feedback on code changes.
 - Praise good patterns when you see them.
 - Don't nitpick style if a formatter exists — let the tool handle it.
 - Distinguish facts ("this throws on null") from opinions ("I prefer guard clauses").
+
+## Related skills
+
+- `codex-review` — 독립적 second opinion (Codex CLI 기반, 다른 모델의 관점)
+- `/review` (Gstack) — PR 사전 리뷰 (SQL·LLM boundary·side effects 특화)
+- `simon-tdd` — RED-GREEN-REFACTOR 사이클 (리뷰 전 테스트 확보)

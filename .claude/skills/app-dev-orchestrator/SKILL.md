@@ -1,6 +1,6 @@
 ---
 name: app-dev-orchestrator
-description: Use when the user asks to build a new app from scratch—"새 앱 만들자", "MVP 기획", "scaffold a new project", "처음부터 만들어줘", "let's build X"—and delegate the 21-stage pipeline (office-hours → research → plan → design → TDD → security → ship → deploy → retro → instincts) to Gstack and simon-stack skills. Produces a populated repo with CLAUDE.md, tests, security audit, and a first deploy. Do NOT use for bug fixes, refactors, or improving existing code—delegate to simon-tdd, investigate, or refactor instead.
+description: Use when the user asks to build a new app from scratch—"새 앱 만들자", "MVP 기획", "scaffold a new project", "처음부터 만들어줘", "let's build X"—and delegate the 22-stage pipeline (office-hours → research → plan → design → TDD → security → ship → deploy → retro → instincts) to Gstack and simon-stack skills. Produces a populated repo with CLAUDE.md, tests, security audit, and a first deploy. Do NOT use for bug fixes, refactors, or improving existing code—delegate to simon-tdd, investigate, or refactor instead.
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 version: 1.1.0
 author: simon
@@ -8,7 +8,7 @@ author: simon
 
 # App Dev Orchestrator
 
-새 앱을 처음부터 만들 때 발동하는 21단계 마스터 파이프라인. 각 단계는 Gstack 또는 simon-stack 스킬을 호출하고, 단계 간 산출물을 다음 단계에 전달한다.
+새 앱을 처음부터 만들 때 발동하는 22단계 마스터 파이프라인. 각 단계는 Gstack 또는 simon-stack 스킬을 호출하고, 단계 간 산출물을 다음 단계에 전달한다.
 
 ## When to use
 
@@ -18,7 +18,7 @@ author: simon
 
 **발동 안 되는 경우**: 버그 수정, 기존 기능 개선, 리팩토링, 단일 파일 작업 → 해당 전용 스킬 사용
 
-## Workflow — 21 단계 파이프라인
+## Workflow — 22 단계 파이프라인
 
 ### 단계 0. 인터뷰 (사용자 질문)
 
@@ -44,35 +44,39 @@ author: simon
 
 > Gstack `/plan-ceo-review` (SCOPE EXPANSION / SELECTIVE / HOLD 모드 중 선택). 문제 재정의·야망 확장.
 
-### 단계 4. `/design-consultation` — DESIGN.md 생성
+### 단계 4. `design-anti-slop` — 레퍼런스 수집 + 슬롭 방지 원칙
 
-> Gstack `/design-consultation`. 제품 톤·타이포·컬러·레이아웃·스페이싱·모션 시스템. `DESIGN.md` 산출.
+> simon-stack `design-anti-slop` 호출. 3-5개 레퍼런스 사이트 수집 → 3-color 제약·타이포 규율·스페이싱 리듬 확립. 이후 디자인 단계 전체에 anti-slop 원칙 적용.
 
-### 단계 5. `stitch-design-flow` — 시안 프롬프트 3종
+### 단계 5. `/design-consultation` — DESIGN.md 생성
+
+> Gstack `/design-consultation`. 제품 톤·타이포·컬러·레이아웃·스페이싱·모션 시스템. `DESIGN.md` 산출. `design-anti-slop` 원칙 반영.
+
+### 단계 6. `stitch-design-flow` — 시안 프롬프트 3종
 
 > simon-stack `stitch-design-flow` 호출. DESIGN.md 를 읽어 Stitch 웹 UI 에 붙여넣을 프롬프트 3개 생성 → 사용자가 Stitch(stitch.withgoogle.com)에서 수동 생성 → 결과 이미지 저장.
 
-### 단계 6. `/design-shotgun` — 변형 탐색
+### 단계 7. `/design-shotgun` — 변형 탐색
 
 > Gstack `/design-shotgun`. 여러 디자인 변형을 생성하고 비교 보드에서 피드백 수렴.
 
-### 단계 7. 대형 플래닝
+### 단계 8. 대형 플래닝
 
 > 스코프가 큰 경우 Claude Code 의 UltraPlan 기능(code.claude.com/docs/en/ultraplan — CLI/웹의 내장 기능, skill 아님) 활용. 소·중 규모는 Gstack `/autoplan` 로 충분. 둘 중 선택.
 
-### 단계 8. `authz-designer` — 인가 모델 선택
+### 단계 9. `authz-designer` — 인가 모델 선택
 
 > simon-stack `authz-designer`. RBAC/ABAC/ReBAC 중 프로젝트 맞는 것 선택, DDL 스키마 생성. `docs/authz.md` 산출.
 
-### 단계 9. API 설계 리뷰
+### 단계 10. API 설계 리뷰
 
 > `paid-api-guard` SKILL 의 "API 설계 리뷰" 섹션 호출. REST/GraphQL/tRPC 선택, N+1 탐지, cursor 페이지네이션, ETag, OpenAPI 생성 전략.
 
-### 단계 10. `/plan-eng-review` → `/autoplan`
+### 단계 11. `/plan-eng-review` → `/autoplan`
 
 > Gstack `/plan-eng-review` 로 엔지니어링 플랜 잠그고 `/autoplan` 으로 자동 리뷰 파이프라인 실행.
 
-### 단계 11. 레포·환경 준비
+### 단계 12. 레포·환경 준비
 
 체크리스트:
 - [ ] GitHub 레포 생성 또는 기존 브랜치 확인
@@ -82,24 +86,25 @@ author: simon
 - [ ] README 초안·LICENSE 선택
 - [ ] CI 워크플로 템플릿 (lint + test + build)
 - [ ] `CLAUDE.md` 초안 작성 (프로젝트 컨텍스트)
+- [ ] `harness-wiki-setup` 실행 — `.harness/wiki/` 지식 베이스 설치
 
-### 단계 12. `simon-worktree` — 병렬 작업 격리
+### 단계 13. `simon-worktree` — 병렬 작업 격리
 
 > simon-stack `simon-worktree` 호출. 병렬 Claude 세션 필요 시 `git worktree add` 로 분리.
 
-### 단계 13. `simon-tdd` — RED-GREEN-REFACTOR 구현
+### 단계 14. `simon-tdd` — RED-GREEN-REFACTOR 구현
 
 > simon-stack `simon-tdd` 호출. 실패 테스트 먼저 → 최소 구현 → 리팩토링. Next.js 프로젝트일 경우 `nextjs-optimizer` 동시 호출 (있을 때만).
 
-### 단계 14. `/design-review` → `/design-html`
+### 단계 15. `/design-review` → `/design-html`
 
 > Gstack `/design-review` 로 시각적 QA (spacing / hierarchy / AI slop 탐지) → `/design-html` 로 production HTML/CSS 생성.
 
-### 단계 15. `/qa` — QA 및 버그 수정
+### 단계 16. `/qa` — QA 및 버그 수정
 
 > Gstack `/qa` 표준 모드. 자동 테스트 + 버그 발견 시 원자적 커밋으로 수정.
 
-### 단계 16. 보안 4단 감사
+### 단계 17. 보안 4단 감사
 
 순차 실행:
 1. simon-stack `security-checklist` (RLS / 구독 / RateLimit / 예산)
@@ -110,23 +115,23 @@ author: simon
 
 각 단계 발견 이슈는 원자 커밋으로 수정 후 재검증.
 
-### 단계 17. `/benchmark` — 성능 측정
+### 단계 18. `/benchmark` — 성능 측정
 
 > Gstack `/benchmark`. Core Web Vitals · 페이지 로드 · 리소스 사이즈 baseline. 트렌드 추적.
 
-### 단계 18. `/review` → `/ship`
+### 단계 19. `/review` → `/ship`
 
 > Gstack `/review` 로 PR 사전 리뷰 → `/ship` 으로 VERSION·CHANGELOG·커밋·푸시·PR 생성.
 
-### 단계 19. `/land-and-deploy` → `/canary`
+### 단계 20. `/land-and-deploy` → `/canary`
 
 > Gstack `/land-and-deploy` 로 머지·CI·배포·health 검증 → `/canary` 로 라이브 모니터링.
 
-### 단계 20. `/document-release` → `/retro`
+### 단계 21. `/document-release` → `/retro`
 
 > Gstack `/document-release` 로 README·ARCHITECTURE·CONTRIBUTING·CLAUDE.md 갱신 → `/retro` 로 주간 회고.
 
-### 단계 21. `simon-instincts` 업데이트 → `/checkpoint`
+### 단계 22. `simon-instincts` 업데이트 → `/checkpoint`
 
 > 이번 사이클에서 배운 것을 `simon-instincts` 로 `~/.claude/instincts/` 에 기록 → Gstack `/checkpoint` 로 상태 스냅샷.
 
@@ -162,8 +167,8 @@ author: simon
 ## Anti-patterns
 
 - ❌ **Plan 없이 코딩 시작** — 단계 1-10 건너뛰고 바로 구현
-- ❌ **레포 확인 없이 커밋** — 단계 11 skip
-- ❌ **민감 필드(subscription_tier, role, credits, is_admin)를 클라이언트에서 수정 가능하게 둠** — 단계 16 RLS 감사 필수
+- ❌ **레포 확인 없이 커밋** — 단계 12 skip
+- ❌ **민감 필드(subscription_tier, role, credits, is_admin)를 클라이언트에서 수정 가능하게 둠** — 단계 17 RLS 감사 필수
 - ❌ **`simon-research` 건너뛰고 플래닝 진입** — 출처 없는 추측 플랜
 - ❌ **한 번에 20단계 실행** — 단계별 사용자 검증 없이 무한 자동화
 - ❌ **Gstack 스킬 존재 여부 확인 없이 호출** — 없으면 degrade 안내 텍스트로 대체
@@ -173,5 +178,5 @@ author: simon
 ## Related skills
 
 - **Gstack 파이프라인**: `/office-hours`, `/plan-ceo-review`, `/plan-eng-review`, `/autoplan`, `/design-consultation`, `/design-shotgun`, `/design-review`, `/design-html`, `/qa`, `/cso`, `/benchmark`, `/review`, `/ship`, `/land-and-deploy`, `/canary`, `/document-release`, `/retro`, `/checkpoint`, `/codex`
-- **simon-stack**: `simon-research`, `simon-tdd`, `simon-worktree`, `simon-instincts`, `security-checklist`, `authz-designer`, `paid-api-guard`, `stitch-design-flow`
+- **simon-stack**: `simon-research`, `simon-tdd`, `simon-worktree`, `simon-instincts`, `security-checklist`, `authz-designer`, `paid-api-guard`, `stitch-design-flow`, `design-anti-slop`, `harness-wiki-setup`, `codex-review`
 - **유틸리티**: `/careful`, `/guard`, `/freeze`, `/unfreeze`

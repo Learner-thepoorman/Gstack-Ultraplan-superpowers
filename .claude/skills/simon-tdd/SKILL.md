@@ -123,3 +123,4 @@ CLAUDE.md 또는 세션 시작 시 아래를 명시:
 - `/browse` — 브라우저 자동 검증 (검증 루프)
 - `/health` — 코드 품질 대시보드
 - `investigate` — 버그 root cause (재현 테스트 먼저)
+- `codex-review` — GREEN 후 독립적 코드 리뷰 (second opinion)
