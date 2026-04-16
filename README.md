@@ -3,7 +3,7 @@
 > Claude Code 가 "새 앱 만들자", "보안 점검", "TDD 시작", "이거 또 틀렸어" 같은 말을 알아듣고
 > **자동으로 올바른 작업 절차를 따르게** 만드는 55개 skill 묶음.
 
-[![validator](https://img.shields.io/badge/skill--validator-20%2F20%20PASS-brightgreen)]() [![cases](https://img.shields.io/badge/JSON%20cases-12%2F12%20PASS-brightgreen)]() [![license](https://img.shields.io/badge/license-MIT-blue)]()
+**[simonk-stack.pages.dev](https://simonk-stack.pages.dev)** · [![validator](https://img.shields.io/badge/skill--validator-20%2F20%20PASS-brightgreen)]() [![cases](https://img.shields.io/badge/JSON%20cases-14%2F14%20PASS-brightgreen)]() [![license](https://img.shields.io/badge/license-MIT-blue)]()
 
 ---
 
@@ -224,6 +224,11 @@ skills-src/                  ← 배포용 skill 소스 (16개)
     ├── skill-gen-agent/     ← validator
     └── context-guardian/
 
+site/                        ← 랜딩 페이지 (simonk-stack.pages.dev)
+├── index.html
+├── skills.html
+└── style.css
+
 docs/                        ← INSTALL, MORNING-START, SKILL-REFERENCE, USING-IN-OTHER-REPOS
 scripts/                     ← install.sh, setup-repo.sh
 templates/                   ← CLAUDE.md, bootstrap-*.sh
@@ -294,6 +299,8 @@ rm ~/.claude/.simon-stack-installed
 | [Superpowers](https://github.com/obra/superpowers) — obra | TDD, worktree, 검증 루프 |
 | [everything-claude-code](https://github.com/affaan-m/everything-claude-code) — affaan-m | Instincts 학습, research-first |
 | [Skill-Agent](https://github.com/Learner-thepoorman/Skill-Agent) | validate_skill.py 검증 도구 |
+| [Impeccable](https://github.com/pbakaus/impeccable) — pbakaus | AI Slop 방지 디자인 원칙 |
+| [Supanova Design Skill](https://github.com/uxjoseph/supanova-design-skill) — uxjoseph | 프리미엄 랜딩 페이지 프레임워크 |
 
 **Boris Cherny 5원칙** 전 skill 내장: Plan 모드 기본 · 병렬은 worktree · 검증 루프=도구 제공 · skip-permissions 금지 · CLAUDE.md 팀 체크인
 
@@ -303,6 +310,7 @@ rm ~/.claude/.simon-stack-installed
 
 ---
 
+**웹사이트**: [simonk-stack.pages.dev](https://simonk-stack.pages.dev) ·
 **상세 skill 문서**: [docs/SKILL-REFERENCE.md](docs/SKILL-REFERENCE.md) ·
 **설치 가이드**: [docs/INSTALL.md](docs/INSTALL.md) ·
 **다른 repo 사용**: [docs/USING-IN-OTHER-REPOS.md](docs/USING-IN-OTHER-REPOS.md)
