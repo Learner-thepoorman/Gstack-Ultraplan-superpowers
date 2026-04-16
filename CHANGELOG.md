@@ -3,7 +3,20 @@
 모든 중요한 변경은 이 파일에 기록합니다.
 형식: [Keep a Changelog](https://keepachangelog.com/), 버전: [SemVer](https://semver.org/).
 
+## [1.3.0] — 2026-04-16
 
+### Changed — Token optimization + README rewrite
+- **구조 분리**: `.claude/skills/` 20개 → `skills-src/` 16개 + `.claude/skills/` 4개 (commit, review, skill-gen-agent, context-guardian)
+  - 매 tool call 마다 55+ skill description 이 system-reminder 로 주입되던 토큰 폭발 해결
+  - `skills-src/` 는 Claude Code 가 무시 → 개발 중 토큰 사용량 극감
+  - 설치 시 hook 이 양쪽 모두 `~/.claude/skills/` 로 복사 (기존 동작 유지)
+- **session-start.sh** — `skills-src/` + `.claude/skills/` 양쪽에서 복사하도록 수정
+- **setup-repo.sh** — vendor mode 소스 복사 + embedded hook 동일 수정
+- **CLAUDE.md** — 디렉토리 구조, 검증 명령, 금기 경로 업데이트
+
+### Docs
+- **README.md** — 1,675줄 → 308줄 (81% 축소). 카탈로그 테이블 + 간결한 구조로 리라이트
+- **docs/SKILL-REFERENCE.md** — (신규) 상세 skill 알고리즘 문서 (README 에서 분리)
 
 ## [1.2.0] — 2026-04-14
 
