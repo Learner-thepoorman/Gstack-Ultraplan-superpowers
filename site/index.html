@@ -4,270 +4,214 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SimonK Stack — Claude Code Skill Library</title>
-  <meta name="description" content="55개 skill로 Claude Code를 체계적으로 만드는 오픈소스 라이브러리. TDD, 보안 감사, 디자인, 배포까지.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <meta name="description" content="55개 skill로 Claude Code를 체계적으로 만드는 오픈소스 라이브러리.">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Hero -->
-  <header class="hero">
-    <nav class="nav">
-      <div class="nav-logo">SimonK<span class="accent">Stack</span></div>
-      <div class="nav-links">
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">SimonK Stack</a>
+      <div class="nav-links" id="navLinks">
         <a href="#features">Features</a>
         <a href="#skills">Skills</a>
-        <a href="#how">How it works</a>
+        <a href="#start">시작하기</a>
         <a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers" class="btn-nav" target="_blank" rel="noopener">GitHub</a>
       </div>
-      <button class="nav-toggle" aria-label="Menu">
-        <span></span><span></span><span></span>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span>
       </button>
-    </nav>
+    </div>
+  </nav>
 
+  <!-- Hero -->
+  <header class="hero">
     <div class="hero-content">
-      <div class="hero-badge">Open Source &middot; MIT License</div>
-      <h1>Claude Code가<br><span class="accent">올바른 순서로</span> 일하게 만드세요</h1>
-      <p class="hero-sub">55개 skill이 TDD, 보안 감사, 디자인, 배포까지<br>일관된 절차를 자동으로 따르게 합니다.</p>
-      <div class="hero-actions">
-        <a href="#install" class="btn btn-primary">시작하기</a>
-        <a href="#skills" class="btn btn-secondary">Skill 둘러보기</a>
+      <p class="hero-label">Open Source — MIT License</p>
+      <h1>Claude Code를 <br>일관되게 만드는 55개 skill</h1>
+      <p class="hero-sub">같은 실수 반복, 매번 다른 작업 순서, 보안 구멍 방치.<br>skill이 해결합니다.</p>
+      <div class="hero-cta">
+        <a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers" class="btn btn-primary" target="_blank" rel="noopener">GitHub에서 시작하기</a>
+        <a href="#features" class="btn btn-ghost">아래로 스크롤</a>
       </div>
-      <div class="hero-terminal">
-        <div class="terminal-bar">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-          <span class="terminal-title">Claude Code</span>
-        </div>
-        <pre class="terminal-body"><span class="t-prompt">나:</span> "새 앱 만들자"
+    </div>
+    <div class="hero-demo">
+      <div class="term">
+        <div class="term-bar"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span></div>
+        <pre class="term-body"><span class="c-green">나:</span> "새 앱 만들자"
 
-<span class="t-system">[app-dev-orchestrator 발동]</span>
-<span class="t-step">  단계 1.</span> /office-hours — YC forcing questions
-<span class="t-step">  단계 2.</span> simon-research — 경쟁 3개 비교
-<span class="t-step">  단계 3.</span> /plan-ceo-review — 10-star 스코프
-<span class="t-dim">  ... 18단계 더 ...</span>
-<span class="t-step">  단계 21.</span> simon-instincts — 학습 저장
-<span class="t-success">  ✅ 프로젝트 완성</span></pre>
+<span class="c-accent">[app-dev-orchestrator]</span>
+<span class="c-dim">  1.</span> /office-hours
+<span class="c-dim">  2.</span> simon-research — 경쟁 3개 비교
+<span class="c-dim">  3.</span> /plan-ceo-review
+<span class="c-dim">  ...</span> 18단계 더
+<span class="c-dim"> 21.</span> simon-instincts — 학습 저장
+<span class="c-green">  ✓ 완료</span></pre>
       </div>
     </div>
   </header>
 
-  <!-- Problem / Solution -->
+  <!-- Features -->
   <section class="section" id="features">
     <div class="container">
-      <h2 class="section-title">왜 필요한가요?</h2>
+      <h2>해결하는 문제</h2>
       <div class="grid-3">
         <div class="card">
-          <div class="card-icon">&#x1F504;</div>
           <h3>같은 실수 반복</h3>
-          <p>RLS 빠뜨리기, .env 커밋, 테스트 없이 배포... Claude는 매번 같은 실수를 합니다.</p>
-          <div class="card-solution">Instincts가 실수를 기록하고 다음 세션에서 자동 회피</div>
+          <p>RLS 빠뜨리기, .env 커밋, 테스트 없이 배포. Instincts가 실수를 기록하고 다음 세션에서 자동 회피합니다.</p>
         </div>
         <div class="card">
-          <div class="card-icon">&#x1F500;</div>
           <h3>매번 다른 순서</h3>
-          <p>큰 작업을 시키면 어떤 날은 테스트 먼저, 어떤 날은 코드 먼저. 일관성이 없습니다.</p>
-          <div class="card-solution">Orchestrator가 21단계 파이프라인을 강제</div>
+          <p>큰 작업을 시키면 일관성이 없습니다. Orchestrator가 21단계 파이프라인을 강제합니다.</p>
         </div>
         <div class="card">
-          <div class="card-icon">&#x1F6E1;</div>
           <h3>보안 구멍 방치</h3>
-          <p>배포 전 보안 점검을 잊거나, RLS/IDOR/API 키 노출을 놓칩니다.</p>
-          <div class="card-solution">Security Orchestrator가 5단계 적대적 감사 자동 실행</div>
+          <p>배포 전 보안 점검을 잊습니다. Security Orchestrator가 5단계 적대적 감사를 자동 실행합니다.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skill Catalog -->
-  <section class="section section-dark" id="skills">
+  <!-- Skills -->
+  <section class="section" id="skills">
     <div class="container">
-      <h2 class="section-title">55개 Skill 카탈로그</h2>
-      <p class="section-sub">3계층으로 구성. 방법론은 simon-stack, 실행은 Gstack.</p>
+      <h2>Skill 카탈로그</h2>
+      <p class="section-sub">방법론은 simon-stack 20개, 실행은 Gstack 36개.</p>
 
-      <div class="skill-group">
-        <h3 class="skill-group-title">Simon-stack (20개)</h3>
-        <div class="grid-2">
-          <div class="skill-card">
-            <span class="skill-tag orchestrator">Orchestrator</span>
-            <h4>app-dev-orchestrator</h4>
-            <p>"새 앱 만들자" → 21단계 파이프라인</p>
-          </div>
-          <div class="skill-card">
-            <span class="skill-tag orchestrator">Orchestrator</span>
-            <h4>security-orchestrator</h4>
-            <p>"보안 점검" → 5단계 적대적 감사</p>
-          </div>
-          <div class="skill-card">
-            <span class="skill-tag security">Security</span>
-            <h4>security-checklist</h4>
-            <p>RLS / 구독 / Rate Limit / 예산 4대 영역</p>
-          </div>
-          <div class="skill-card">
-            <span class="skill-tag security">Security</span>
-            <h4>authz-designer</h4>
-            <p>RBAC / ABAC / ReBAC 선택 + IDOR 감사</p>
-          </div>
-          <div class="skill-card">
-            <span class="skill-tag method">Method</span>
-            <h4>simon-tdd</h4>
-            <p>RED → GREEN → REFACTOR 사이클 강제</p>
-          </div>
-          <div class="skill-card">
-            <span class="skill-tag method">Method</span>
-            <h4>simon-instincts</h4>
-            <p>실수 기록 → 4파일 누적 → 자동 로드</p>
-          </div>
-          <div class="skill-card">
-            <span class="skill-tag method">Method</span>
-            <h4>simon-research</h4>
-            <p>플래닝 전 외부 리서치 의무화</p>
-          </div>
-          <div class="skill-card">
-            <span class="skill-tag tool">Tool</span>
-            <h4>nextjs-optimizer</h4>
-            <p>Next.js 5대 성능 영역 감사</p>
-          </div>
+      <div class="skill-list">
+        <div class="skill-item">
+          <div class="skill-name">app-dev-orchestrator</div>
+          <div class="skill-desc">"새 앱 만들자" → 21단계 파이프라인</div>
         </div>
-        <p class="skill-more">+ paid-api-guard, simon-worktree, stitch-design-flow, project-context-md, skill-gen-agent, context-guardian 등</p>
+        <div class="skill-item">
+          <div class="skill-name">security-orchestrator</div>
+          <div class="skill-desc">"보안 점검" → 5단계 적대적 감사</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">simon-tdd</div>
+          <div class="skill-desc">RED → GREEN → REFACTOR 사이클 강제</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">simon-instincts</div>
+          <div class="skill-desc">실수 기록 → 4파일 누적 → 자동 로드</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">security-checklist</div>
+          <div class="skill-desc">RLS / 구독 / Rate Limit / 예산 4대 영역</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">authz-designer</div>
+          <div class="skill-desc">RBAC / ABAC / ReBAC 선택 + IDOR 감사</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">simon-research</div>
+          <div class="skill-desc">플래닝 전 외부 리서치 의무화</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">nextjs-optimizer</div>
+          <div class="skill-desc">Next.js 5대 성능 영역 감사</div>
+        </div>
       </div>
 
-      <div class="skill-group">
-        <h3 class="skill-group-title">Gstack (36개) — 실행 파이프라인</h3>
-        <div class="tag-cloud">
-          <span class="tag">/office-hours</span>
-          <span class="tag">/plan-ceo-review</span>
-          <span class="tag">/plan-eng-review</span>
-          <span class="tag">/design-consultation</span>
-          <span class="tag">/design-shotgun</span>
-          <span class="tag">/design-html</span>
-          <span class="tag">/qa</span>
-          <span class="tag">/ship</span>
-          <span class="tag">/land-and-deploy</span>
-          <span class="tag">/canary</span>
-          <span class="tag">/cso</span>
-          <span class="tag">/codex</span>
-          <span class="tag">/review</span>
-          <span class="tag">/benchmark</span>
-          <span class="tag">/health</span>
-          <span class="tag">/retro</span>
-          <span class="tag">/investigate</span>
-          <span class="tag">/browse</span>
-          <span class="tag">/checkpoint</span>
-          <span class="tag">... +17 more</span>
+      <div class="gstack-tags">
+        <p class="gstack-label">Gstack 36개 — 실행 파이프라인</p>
+        <div class="tags">
+          <span>/office-hours</span><span>/plan-ceo-review</span><span>/plan-eng-review</span>
+          <span>/design-consultation</span><span>/design-html</span><span>/qa</span>
+          <span>/ship</span><span>/land-and-deploy</span><span>/canary</span>
+          <span>/cso</span><span>/codex</span><span>/review</span>
+          <span>/benchmark</span><span>/health</span><span>/retro</span>
+          <span>/investigate</span><span>/browse</span><span>/checkpoint</span>
+          <span>+18 more</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How it works -->
+  <!-- How it works — purpose driven -->
   <section class="section" id="how">
     <div class="container">
-      <h2 class="section-title">작동 원리</h2>
-      <div class="flow">
-        <div class="flow-step">
-          <div class="flow-num">1</div>
-          <h3>SessionStart Hook</h3>
-          <p>세션 시작 시 자동으로 55개 skill + Instincts 4파일을 설치. 첫 실행 ~30초, 이후 &lt;1초.</p>
+      <h2>세션 시작 → 자동 적용</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div>
+            <h3>레포 열기</h3>
+            <p>Claude Code 웹에서 레포를 열면 SessionStart hook이 55개 skill을 자동 설치합니다.</p>
+          </div>
         </div>
-        <div class="flow-arrow">&#x2192;</div>
-        <div class="flow-step">
-          <div class="flow-num">2</div>
-          <h3>Description 매칭</h3>
-          <p>사용자 메시지와 각 skill의 description을 비교해 가장 적합한 skill을 자동 선택.</p>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div>
+            <h3>자연어로 요청</h3>
+            <p>"새 앱 만들자", "보안 점검" — 메시지에 맞는 skill이 자동 매칭됩니다.</p>
+          </div>
         </div>
-        <div class="flow-arrow">&#x2192;</div>
-        <div class="flow-step">
-          <div class="flow-num">3</div>
-          <h3>Skill 실행</h3>
-          <p>선택된 skill의 체크리스트·파이프라인에 따라 Claude가 작업. 검증 도구로 자가 확인.</p>
-        </div>
-        <div class="flow-arrow">&#x2192;</div>
-        <div class="flow-step">
-          <div class="flow-num">4</div>
-          <h3>학습 누적</h3>
-          <p>실수·패턴·한국 컨텍스트를 Instincts에 기록. 다음 세션부터 자동 반영.</p>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div>
+            <h3>학습 누적</h3>
+            <p>실수와 패턴이 Instincts에 기록됩니다. 세션이 쌓일수록 Claude가 정확해집니다.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Install -->
-  <section class="section section-dark" id="install">
-    <div class="container">
-      <h2 class="section-title">시작하기</h2>
-      <div class="grid-3">
-        <div class="install-card">
-          <div class="install-num">1</div>
-          <h3>Claude Code 웹</h3>
-          <p>가장 쉬운 방법. 레포 열고 세션 시작하면 자동 설정.</p>
-          <code>claude.ai/code 에서 레포 열기</code>
-        </div>
-        <div class="install-card">
-          <div class="install-num">2</div>
-          <h3>로컬 CLI</h3>
-          <p>한 번 설치로 영구 사용.</p>
-          <code>git clone ... && ./scripts/install.sh</code>
-        </div>
-        <div class="install-card">
-          <div class="install-num">3</div>
-          <h3>다른 프로젝트에</h3>
-          <p>기존 프로젝트에 embed.</p>
-          <code>./scripts/setup-repo.sh /path</code>
-        </div>
+  <!-- CTA -->
+  <section class="section cta-section" id="start">
+    <div class="container cta-box">
+      <h2>지금 시작하세요</h2>
+      <p>Claude Code 웹에서 레포를 열면 30초 안에 55개 skill이 활성화됩니다.</p>
+      <div class="cta-actions">
+        <a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers" class="btn btn-primary" target="_blank" rel="noopener">GitHub에서 보기</a>
+      </div>
+      <div class="cta-install">
+        <p class="cta-alt">로컬 설치:</p>
+        <code>git clone https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers.git && ./scripts/install.sh</code>
       </div>
     </div>
   </section>
 
-  <!-- Credits / Footer -->
+  <!-- Footer -->
   <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo">SimonK Stack</span>
+        <p>Claude Code를 위한 55개 skill 라이브러리. 무료. MIT.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers/blob/main/docs/SKILL-REFERENCE.md" target="_blank" rel="noopener">Docs</a>
+        <a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a>
+      </div>
+    </div>
     <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-logo">SimonK<span class="accent">Stack</span></div>
-          <p class="footer-desc">Claude Code를 위한 55개 skill 라이브러리.<br>무료. 오픈소스. MIT.</p>
-        </div>
-        <div>
-          <h4>Credits</h4>
-          <ul>
-            <li><a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener">Gstack</a> — garrytan</li>
-            <li><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">Superpowers</a> — obra</li>
-            <li><a href="https://github.com/affaan-m/everything-claude-code" target="_blank" rel="noopener">ECC</a> — affaan-m</li>
-          </ul>
-        </div>
-        <div>
-          <h4>Links</h4>
-          <ul>
-            <li><a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers" target="_blank" rel="noopener">GitHub Repo</a></li>
-            <li><a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers/blob/main/docs/SKILL-REFERENCE.md" target="_blank" rel="noopener">Skill Reference</a></li>
-            <li><a href="https://github.com/learner-thepoorman/Gstack-Ultraplan-superpowers/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 SimonK Stack. MIT License.</p>
-      </div>
+      <p class="footer-copy">&copy; 2026 SimonK Stack</p>
     </div>
   </footer>
 
   <script>
-    // Mobile nav toggle
-    const toggle = document.querySelector('.nav-toggle');
-    const links = document.querySelector('.nav-links');
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+    // Mobile toggle
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
     toggle.addEventListener('click', () => {
       links.classList.toggle('open');
       toggle.classList.toggle('active');
     });
-    // Close on link click
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        links.classList.remove('open');
-        toggle.classList.remove('active');
-      });
-    });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.classList.remove('active');
+    }));
   </script>
 </body>
 </html>
