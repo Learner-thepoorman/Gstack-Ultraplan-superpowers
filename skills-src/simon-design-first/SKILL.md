@@ -59,6 +59,22 @@ Google Fonts 미리보기 URL 포함한 후보 3-5개 + AI 추천 1개.
 | Plus Jakarta Sans | 모던 | https://fonts.google.com/specimen/Plus+Jakarta+Sans |
 | Space Grotesk | 기술적 | https://fonts.google.com/specimen/Space+Grotesk |
 
+### Step 3.5. AI Trope Detection (사전 차단)
+
+레퍼런스 추천 직후, 사용자에게 다음 안티패턴을 명시하여 동의 받음:
+
+| AI Slop | 대안 |
+|---|---|
+| Inter 폰트 (어디서나 보임) | Pretendard / Geist / Plus Jakarta Sans |
+| pure black `#000` 배경 | tinted neutral (`#0d0f1a` 같은 violet/blue tint) |
+| 이모지를 아이콘 대용 | 텍스트 라벨 또는 SVG icon (Iconify Solar) |
+| 과한 gradient (특히 purple→pink) | 단색 또는 미묘한 tint |
+| 둥근 카드 + 좌측 컬러 보더 | 단순 1px border 또는 shadow only |
+| 모든 것이 가운데 정렬 | 의도적 비대칭, asymmetric grid |
+| Bouncy/elastic easing | ease-out 또는 cubic-bezier(0.16, 1, 0.3, 1) |
+
+상세 detection list와 anti-pattern 갤러리: [references/design-chapters.md](references/design-chapters.md)
+
 ### Step 4. 사용자 방향 확정
 
 "이 느낌으로 갈까요?" 또는 "다른 레퍼런스 보여줄까요?" 물어본다.
@@ -67,6 +83,17 @@ Google Fonts 미리보기 URL 포함한 후보 3-5개 + AI 추천 1개.
 - 특정 방향 선택 → 그 방향으로 진행
 - "알아서 해" → AI가 추천 방향으로 진행
 - "다른 것" → Step 2부터 재시작
+
+### Step 4.5. Accessibility Quick Check
+
+방향 확정 시 다음 체크리스트가 충족되는지 확인 (하위 skill에 전달):
+
+- [ ] Text/background contrast WCAG AA (4.5:1 normal text, 3:1 large text)
+- [ ] Focus state 명시 (keyboard navigation 가능)
+- [ ] Interactive 요소는 44×44px 최소 (mobile tap target)
+- [ ] Loading/error/empty/disabled state 모두 디자인됨
+- [ ] Semantic HTML (`<button>`, `<nav>`, `<main>`, alt text)
+- [ ] Reduced-motion 대응 (`prefers-reduced-motion`)
 
 ### Step 5. 하위 skill 위임
 

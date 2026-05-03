@@ -24,6 +24,19 @@
 
 ## 프로젝트 목록
 
+## 전역 — Skill 작성 (모든 프로젝트 공통)
+
+- 새 skill 작성 시 반드시 `skill-gen-agent`의 Create 모드 경유
+- 직접 SKILL.md 작성 금지 — validate_skill.py가 잡아내는 issue (네이밍, 길이, description 점수)를 사전 차단
+- 7단계 검증 파이프라인:
+  1. 인터뷰 (목적·트리거·산출물·도구·관련 skill·에지케이스·예시)
+  2. SKILL.md 초안 생성
+  3. validate_skill.py 자동 검증 (0 errors / 0 warnings 통과까지 반복)
+  4. evals/cases.json 케이스 ≥2개 작성
+  5. test_skill.py --dry-run 검증
+  6. references/scripts 분리 (500줄 한도 준수)
+  7. install_skill.py로 ~/.claude/skills/에 설치
+
 ## 전역 — 웹 디자인 철학 (모든 프로젝트 공통)
 
 - **참조 skill**: Impeccable (pbakaus), Supanova Design Skill (uxjoseph)

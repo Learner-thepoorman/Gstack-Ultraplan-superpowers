@@ -94,6 +94,7 @@ LICENSE                        ← MIT + upstream credits
 
 - **Skill 수정 후 필수**: `validate_skill.py` 실행 + 0 errors / 0 warnings 확인
 - **새 skill 작성 시**: `evals/cases.json` 에 최소 2 개 test case 포함
+- **새 skill 작성은 반드시 `skill-gen-agent` 경유**: 7단계 검증 파이프라인을 스킵하면 description 점수·네이밍·길이 한도 위반이 누락됨. 직접 SKILL.md 작성 금지.
 - **Description 작성**:
   - `"Use when..."` 으로 시작
   - 한국어 + 영어 트리거 문구 병기
