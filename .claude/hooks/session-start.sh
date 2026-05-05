@@ -42,14 +42,16 @@ log "Bootstrap required. current=$CURRENT_SHA"
 # --- Directories ---
 mkdir -p ~/.claude/skills ~/.claude/instincts
 
-# --- 1. Gstack runtime ---
+# --- 1. Gstack runtime (optional, for browse/qa tools only) ---
+# Skill definitions are now vendored in skills-src/ — no clone needed for skills.
+# The runtime clone is only needed for Gstack's browse daemon and QA tools.
 if [ ! -d ~/.claude/skills/gstack ]; then
-  log "Cloning Gstack..."
+  log "Cloning Gstack runtime (optional, for browse/QA tools)..."
   TMP=$(mktemp -d)
   if git clone --depth 1 https://github.com/garrytan/gstack "$TMP/gstack-src" 2>>"$LOG_FILE"; then
     cp -a "$TMP/gstack-src" ~/.claude/skills/gstack
     rm -rf "$TMP"
-    log "Gstack cloned OK"
+    log "Gstack runtime cloned OK"
 
     if command -v bun >/dev/null 2>&1; then
       log "Running bun install in Gstack..."
@@ -58,12 +60,12 @@ if [ ! -d ~/.claude/skills/gstack ]; then
       log "WARN: bun not found — Gstack runtime scripts will be limited"
     fi
   else
-    log "ERROR: Gstack clone failed — check network. Hook continuing with simon-stack only."
+    log "WARN: Gstack runtime clone failed (non-fatal — all skill definitions are vendored)"
     rm -rf "$TMP"
   fi
 fi
 
-# --- 2. Expose individual Gstack skills ---
+# --- 2. Expose individual Gstack skills (skip if already vendored in skills-src) ---
 if [ -d ~/.claude/skills/gstack ]; then
   log "Exposing individual Gstack skills..."
   count=0

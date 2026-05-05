@@ -2,7 +2,7 @@
 
 > 서비스 기획부터 개발, 수익화, 그로스, Exit까지 — Claude Code가 **자동으로 올바른 절차를 따르게** 만드는 skill 라이브러리.
 
-**[simonk-stack.pages.dev](https://simonk-stack.pages.dev)** · [![validator](https://img.shields.io/badge/skill--validator-48%2F48%20PASS-brightgreen)]() [![license](https://img.shields.io/badge/license-MIT-blue)]()
+**[simonk-stack.pages.dev](https://simonk-stack.pages.dev)** · [![validator](https://img.shields.io/badge/skill--validator-85%20skills-brightgreen)]() [![license](https://img.shields.io/badge/license-MIT-blue)]()
 
 ---
 
@@ -144,13 +144,21 @@ cd SimonK-stack && ./scripts/install.sh
 
 ---
 
-## 실행 파이프라인 (36 skills)
+### Execution Pipeline — 실행 파이프라인 (vendored)
 
-위 48개 skill 외에, [Gstack](https://github.com/garrytan/gstack) 기반 36개 실행 도구가 자동 설치됩니다:
+[Gstack](https://github.com/garrytan/gstack) 기반 36개 실행 도구가 `skills-src/`에 내장되어 있습니다 (원본 형식 유지):
 
-`/office-hours` `/plan-ceo-review` `/plan-eng-review` `/plan-design-review` `/plan-devex-review` `/autoplan` `/design-consultation` `/design-shotgun` `/design-review` `/design-html` `/qa` `/qa-only` `/review` `/benchmark` `/health` `/codex` `/ship` `/land-and-deploy` `/canary` `/setup-deploy` `/document-release` `/cso` `/careful` `/guard` `/freeze` `/unfreeze` `/retro` `/investigate` `/browse` `/learn` `/devex-review` `/checkpoint` `/pair-agent` `/setup-browser-cookies` `/open-gstack-browser` `/gstack-upgrade`
+| 카테고리 | Skills |
+|---|---|
+| **플래닝** | `office-hours` `plan-ceo-review` `plan-eng-review` `plan-design-review` `plan-devex-review` `autoplan` |
+| **디자인** | `design-consultation` `design-shotgun` `design-review` `design-html` |
+| **구현·QA** | `qa` `qa-only` `benchmark` `health` `codex` |
+| **배포** | `ship` `land-and-deploy` `canary` `setup-deploy` `document-release` |
+| **보안·품질** | `cso` `careful` `guard` `freeze` `unfreeze` `retro` |
+| **리서치·DX** | `investigate` `browse` `learn` `devex-review` |
+| **기타** | `checkpoint` `pair-agent` `setup-browser-cookies` `open-gstack-browser` `connect-chrome` `gstack-upgrade` `session-start-hook` |
 
-**총 84개 skill** — 기획부터 Exit까지 전 과정 커버.
+**총 85개 skill** — 전부 `skills-src/`에 내장, 외부 clone 불필요.
 
 ---
 
@@ -200,9 +208,10 @@ cd SimonK-stack && ./scripts/install.sh
 
 | 테스트 | 결과 |
 |---|---|
-| Static validation | **48/48 PASS** |
+| Native skills (SimonK) | **49/49 PASS** |
+| Vendored skills (Gstack) | **36 vendored** (원본 형식 유지, 기능 정상) |
 | Bash syntax | **18/18 PASS** |
-| YAML frontmatter | **48/48 PASS** |
+| Orchestrator chain | **모든 참조 존재 확인** |
 | Trigger conflict | **2건 (의도적 핸드오프)** |
 
 ---
@@ -210,7 +219,7 @@ cd SimonK-stack && ./scripts/install.sh
 ## FAQ
 
 **Q. 총 몇 개 skill?**
-48개 (전략+개발+수익화+보안+분석) + 36개 실행 도구 = **84개**.
+49개 (전략+개발+수익화+보안+분석) + 36개 실행 도구 = **85개**. 전부 `skills-src/`에 내장.
 
 **Q. 다른 repo에서 쓰려면?**
 `scripts/setup-repo.sh /path/to/target` → 상세: [docs/USING-IN-OTHER-REPOS.md](docs/USING-IN-OTHER-REPOS.md)
